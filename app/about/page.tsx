@@ -31,17 +31,7 @@ export default function About() {
               </h2>
               <div className="space-y-5 text-[rgb(var(--md-sys-color-on-surface-variant))] leading-relaxed">
                 <p>
-                  I&apos;m Ney, a passionate developer who loves building things that live on the internet. 
-                  I specialize in creating elegant, efficient, and user-friendly applications.
-                </p>
-                <p>
-                  My journey in development started with curiosity and has evolved into a career 
-                  focused on delivering high-quality digital experiences. I believe in writing clean, 
-                  maintainable code and staying up-to-date with the latest technologies.
-                </p>
-                <p>
-                  When I&apos;m not coding, you can find me exploring new technologies, contributing to 
-                  open-source projects, or sharing knowledge with the developer community.
+                  im niko gonzales. ive got interest in programming, designing, football and im 16, born on 26th october 2009. and stuff.
                 </p>
               </div>
             </div>
@@ -54,10 +44,10 @@ export default function About() {
               </h3>
               <div className="space-y-4">
                 {[
-                  { label: 'Name', value: 'Ney' },
-                  { label: 'Role', value: 'Developer &amp; Creator' },
-                  { label: 'Location', value: 'Earth' },
-                  { label: 'Experience', value: 'Building cool stuff' },
+                  { label: 'Name', value: 'Niko Gonzales' },
+                  { label: 'Role', value: 'Dev, Academy Futsal' },
+                  { label: 'Location', value: 'Brazil, Sao Paulo' },
+                  { label: 'Experience', value: '5yrs' },
                 ].map((fact, index) => (
                   <div key={index} className="flex justify-between items-center py-3 border-b border-[rgb(var(--md-sys-color-outline-variant))] border-opacity-30 transition-all duration-300 ease-out hover:pl-2">
                     <span className="text-[rgb(var(--md-sys-color-on-surface-variant))]">{fact.label}</span>
@@ -115,7 +105,7 @@ export default function About() {
             Interests
           </h2>
           <div className="flex flex-wrap justify-center gap-3">
-            {['Open Source', 'Web Development', 'UI/UX Design', 'Problem Solving', 'Learning New Tech', 'Building Products'].map((interest, index) => (
+            {['Open Source', 'Web Development', 'UI/UX Design', 'Football', 'Learning New Tech', 'Building Products'].map((interest, index) => (
               <span key={index} className="md-chip" style={{ animationDelay: `${0.05 * index}s` }}>
                 {interest}
               </span>

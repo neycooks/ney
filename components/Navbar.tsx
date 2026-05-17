@@ -128,9 +128,9 @@ export default function Navbar() {
           />
 
           <nav className="relative z-10 flex items-center gap-6 px-8 py-3 font-sans">
-            <Link href="/" className="text-xl text-[rgb(var(--md-sys-color-primary))] hover:opacity-80 transition-all duration-300 ease-out hover:scale-110">
-              ney
-            </Link>
+              <Link href="/" className="tangerine-bold text-2xl text-[rgb(var(--md-sys-color-primary))] hover:opacity-80 transition-all duration-300 ease-out hover:scale-110">
+                ney
+              </Link>
 
             <div className="h-5 w-px bg-[rgb(var(--md-sys-color-outline-variant))] opacity-20" />
 
