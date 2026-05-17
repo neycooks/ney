@@ -21,29 +21,31 @@ export default function Navbar() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <header ref={containerRef} className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
+    <header ref={containerRef} className="fixed top-5 left-0 right-0 z-50 flex justify-center px-4">
       <LiquidGlass
         mouseContainer={containerRef}
         elasticity={0.3}
         cornerRadius={999}
-        displacementScale={50}
-        blurAmount={0.08}
+        displacementScale={70}
+        blurAmount={0.0625}
         saturation={140}
-        aberrationIntensity={1.5}
+        aberrationIntensity={2}
         mode="standard"
         overLight={theme === 'light'}
         padding="0"
-        className="!bg-transparent !border-0"
+        className="font-sans"
         style={{
           position: 'relative',
         }}
       >
-        <nav className="flex items-center gap-8 px-6 py-3">
-          <Link href="/" className="font-display text-xl text-[rgb(var(--md-sys-color-primary))] hover:opacity-80 transition-all duration-300 ease-out hover:scale-110">
+        <nav className="flex items-center gap-8 px-8 py-3" data-liquid-glass>
+          <Link href="/" className="text-xl text-[rgb(var(--md-sys-color-primary))] hover:opacity-80 transition-all duration-300 ease-out hover:scale-110">
             ney
           </Link>
 
-          <div className="hidden md:flex items-center gap-6">
+          <div className="h-6 w-px bg-[rgb(var(--md-sys-color-outline-variant))] bg-opacity-30" />
+
+          <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <Link
                 key={item.href}
@@ -57,9 +59,11 @@ export default function Navbar() {
             ))}
           </div>
 
+          <div className="h-6 w-px bg-[rgb(var(--md-sys-color-outline-variant))] bg-opacity-30" />
+
           <button
             onClick={toggleTheme}
-            className="w-9 h-9 rounded-full bg-[rgb(var(--md-sys-color-surface-container-highest))] bg-opacity-50 flex items-center justify-center hover:bg-[rgb(var(--md-sys-color-primary-container))] hover:text-[rgb(var(--md-sys-color-on-primary-container))] transition-all duration-300 ease-out active:scale-90 hover:scale-110 hover:rotate-12"
+            className="w-9 h-9 rounded-full flex items-center justify-center text-[rgb(var(--md-sys-color-on-surface-variant))] hover:text-[rgb(var(--md-sys-color-primary))] transition-all duration-300 ease-out active:scale-90 hover:scale-110 hover:rotate-12"
             aria-label="Toggle theme"
           >
             {theme === 'dark' ? (

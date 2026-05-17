@@ -233,3 +233,22 @@
 .stagger-6 { animation-delay: 0.6s; }
 .stagger-7 { animation-delay: 0.7s; }
 .stagger-8 { animation-delay: 0.8s; }
+
+@layer components {
+  [data-liquid-glass] {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(var(--md-sys-color-surface-container), 0.6);
+    border: 1px solid rgba(var(--md-sys-color-outline-variant), 0.2);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  [data-theme="dark"] [data-liquid-glass] {
+    background: rgba(var(--md-sys-color-surface-container), 0.5);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+}
