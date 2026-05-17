@@ -21,7 +21,7 @@ export default function Navbar() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <header ref={containerRef} className="fixed top-5 left-0 right-0 z-50 flex justify-center px-4">
+    <header ref={containerRef} className="fixed top-5 left-1/2 -translate-x-1/2 z-50">
       <LiquidGlass
         mouseContainer={containerRef}
         elasticity={0.3}
@@ -35,17 +35,21 @@ export default function Navbar() {
         padding="0"
         className="font-sans"
         style={{
-          position: 'relative',
+          background: 'rgba(var(--md-sys-color-surface-container), 0.1)',
+          backdropFilter: 'blur(24px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+          border: '1px solid rgba(var(--md-sys-color-outline-variant), 0.15)',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
         }}
       >
-        <nav className="flex items-center gap-8 px-8 py-3" data-liquid-glass>
+        <nav className="flex items-center gap-6 px-8 py-3">
           <Link href="/" className="text-xl text-[rgb(var(--md-sys-color-primary))] hover:opacity-80 transition-all duration-300 ease-out hover:scale-110">
             ney
           </Link>
 
-          <div className="h-6 w-px bg-[rgb(var(--md-sys-color-outline-variant))] bg-opacity-30" />
+          <div className="h-5 w-px bg-[rgb(var(--md-sys-color-outline-variant))] opacity-20" />
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navItems.map((item) => (
               <Link
                 key={item.href}
@@ -59,7 +63,7 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="h-6 w-px bg-[rgb(var(--md-sys-color-outline-variant))] bg-opacity-30" />
+          <div className="h-5 w-px bg-[rgb(var(--md-sys-color-outline-variant))] opacity-20" />
 
           <button
             onClick={toggleTheme}
