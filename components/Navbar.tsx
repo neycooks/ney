@@ -58,7 +58,7 @@ export default function Navbar() {
     <header className="fixed top-5 left-1/2 -translate-x-1/2 z-50">
       <div
         ref={containerRef}
-        className="relative rounded-full overflow-hidden transition-all duration-500 ease-out"
+        className="relative rounded-full overflow-hidden"
         style={{
           background: `
             radial-gradient(ellipse at ${glareX}% ${glareY}%, rgba(255,255,255,${fresnelIntensity}) 0%, transparent 60%),
@@ -74,10 +74,11 @@ export default function Navbar() {
             inset 0 -1px 0 rgba(0, 0, 0, 0.05),
             inset ${refractionX}px ${refractionY}px 20px rgba(255, 255, 255, 0.03)
           `,
-          transform: isHovered
+          transform: `translateZ(0) ${isHovered
             ? `scale(1.02) perspective(1000px) rotateX(${(mousePos.y - 0.5) * -3}deg) rotateY(${(mousePos.x - 0.5) * 3}deg)`
-            : 'scale(1)',
-          transition: 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease-out',
+            : 'scale(1)'}`,
+          transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease-out',
+          willChange: 'transform, box-shadow',
         }}
       >
         {/* Edge blur/fade overlay */}
@@ -86,6 +87,7 @@ export default function Navbar() {
           style={{
             background: `radial-gradient(ellipse at ${glareX}% ${glareY}%, transparent 40%, rgba(var(--md-sys-color-surface-container), 0.1) 100%)`,
             boxShadow: 'inset 0 0 20px rgba(255, 255, 255, 0.05)',
+            willChange: 'background',
           }}
         />
 
@@ -94,8 +96,9 @@ export default function Navbar() {
           className="absolute inset-0 rounded-full pointer-events-none opacity-60"
           style={{
             background: `linear-gradient(${45 + (mousePos.x - 0.5) * 30}deg, transparent 30%, rgba(255,255,255,0.08) 45%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.08) 55%, transparent 70%)`,
-            transform: `translateX(${(mousePos.x - 0.5) * 20}px)`,
+            transform: `translateZ(0) translateX(${(mousePos.x - 0.5) * 20}px)`,
             transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+            willChange: 'transform',
           }}
         />
 
@@ -105,8 +108,9 @@ export default function Navbar() {
           style={{
             background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(var(--md-sys-color-primary), 0.04) 0%, transparent 50%)`,
             filter: `blur(${isHovered ? 2 : 1}px)`,
-            transform: `translate(${refractionX * 0.5}px, ${refractionY * 0.5}px)`,
+            transform: `translateZ(0) translate(${refractionX * 0.5}px, ${refractionY * 0.5}px)`,
             transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+            willChange: 'transform, filter',
           }}
         />
 
