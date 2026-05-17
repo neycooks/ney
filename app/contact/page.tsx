@@ -13,7 +13,7 @@ export default function Contact() {
             Contact
           </h1>
           <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] text-lg opacity-0 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            Let's get in touch
+            Let&apos;s get in touch
           </p>
         </div>
 
@@ -24,7 +24,7 @@ export default function Contact() {
               Get in Touch
             </h2>
             <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] mb-8 leading-relaxed">
-              I'm always open to discussing new projects, creative ideas, or opportunities to be 
+              I&apos;m always open to discussing new projects, creative ideas, or opportunities to be 
               part of your vision. Feel free to reach out through any of the channels below.
             </p>
 

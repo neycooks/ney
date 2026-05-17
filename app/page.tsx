@@ -12,7 +12,7 @@ export default function Home() {
         <section className="max-w-6xl mx-auto px-6 py-20 md:py-32">
           <div className="animate-fade-in">
             <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] text-lg md:text-xl mb-4 opacity-0 stagger-1 animate-slide-up">
-              Hello, I'm
+              Hello, I&apos;m
             </p>
             <h1 className="font-display text-6xl md:text-8xl lg:text-9xl text-[rgb(var(--md-sys-color-primary))] mb-6 opacity-0 stagger-2 animate-slide-up">
               Ney

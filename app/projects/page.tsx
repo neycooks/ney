@@ -45,7 +45,7 @@ export default function Projects() {
             Projects
           </h1>
           <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] text-lg opacity-0 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            Some things I've built
+            Some things I&apos;ve built
           </p>
         </div>
 

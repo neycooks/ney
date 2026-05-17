@@ -26,7 +26,7 @@ export default function About() {
             </h2>
             <div className="space-y-4 text-[rgb(var(--md-sys-color-on-surface-variant))] leading-relaxed">
               <p>
-                I'm Ney, a passionate developer who loves building things that live on the internet. 
+                I&apos;m Ney, a passionate developer who loves building things that live on the internet. 
                 I specialize in creating elegant, efficient, and user-friendly applications.
               </p>
               <p>
@@ -35,7 +35,7 @@ export default function About() {
                 maintainable code and staying up-to-date with the latest technologies.
               </p>
               <p>
-                When I'm not coding, you can find me exploring new technologies, contributing to 
+                When I&apos;m not coding, you can find me exploring new technologies, contributing to 
                 open-source projects, or sharing knowledge with the developer community.
               </p>
             </div>
@@ -119,10 +119,10 @@ export default function About() {
             Want to work together?
           </h2>
           <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] mb-6">
-            I'm always open to new opportunities and collaborations.
+            I&apos;m always open to new opportunities and collaborations.
           </p>
           <Link href="/contact" className="md-button">
-            Let's Talk
+            Let&apos;s Talk
           </Link>
         </div>
       </main>
