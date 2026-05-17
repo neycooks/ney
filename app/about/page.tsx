@@ -70,15 +70,15 @@ export default function About() {
             {[
               {
                 category: 'Frontend',
-                skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'HTML/CSS'],
+                skills: ['React', 'Next.js', 'TypeScript', 'HTML/CSS'],
               },
               {
                 category: 'Backend',
-                skills: ['Node.js', 'Python', 'REST APIs', 'Database Design'],
+                skills: ['Node.js', 'Python', 'Rust'],
               },
               {
-                category: 'Tools &amp; Others',
-                skills: ['Git', 'Docker', 'Linux', 'CI/CD', 'Agile'],
+                category: 'Tools',
+                skills: ['Git', 'Photoshop', 'Zed'],
               },
             ].map((group, index) => (
               <ScrollReveal key={index} direction="scale" delay={0.1 * index}>

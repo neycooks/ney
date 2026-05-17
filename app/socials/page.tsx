@@ -81,14 +81,14 @@ export default function Socials() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[rgb(var(--md-sys-color-surface-container))] rounded-[28px] p-6 transition-all duration-500 ease-out hover:shadow-lg hover:-translate-y-1 group"
+                  className="bg-[rgb(var(--md-sys-color-surface-container))] rounded-[28px] p-6 transition-all duration-500 ease-out hover:shadow-lg hover:-translate-y-1 group overflow-visible"
                 >
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-14 h-14 rounded-2xl bg-[rgb(var(--md-sys-color-primary-container))] flex items-center justify-center text-[rgb(var(--md-sys-color-on-primary-container))] transition-all duration-500 ease-out group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-lg">
+                    <div className="w-14 h-14 rounded-2xl bg-[rgb(var(--md-sys-color-primary-container))] flex items-center justify-center text-[rgb(var(--md-sys-color-on-primary-container))] transition-all duration-500 ease-out group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-lg shrink-0">
                       {iconMap[social.icon.toLowerCase()] || iconMap.github}
                     </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-[rgb(var(--md-sys-color-on-surface))] transition-colors duration-300 group-hover:text-[rgb(var(--md-sys-color-primary))]">
+                    <div className="min-w-0">
+                      <h3 className="text-lg font-semibold text-[rgb(var(--md-sys-color-on-surface))] transition-colors duration-300 group-hover:text-[rgb(var(--md-sys-color-primary))] truncate">
                         {social.name}
                       </h3>
                       <div className="flex items-center gap-1 text-[rgb(var(--md-sys-color-on-surface-variant))] text-sm">
