@@ -31,7 +31,13 @@ export default function About() {
               </h2>
               <div className="space-y-5 text-[rgb(var(--md-sys-color-on-surface-variant))] leading-relaxed">
                 <p>
-                  im niko gonzales. ive got interest in programming, designing, football and im 16, born on 26th october 2009. and stuff.
+                  im niko gonzales. im 16, born on 26th october 2009, living in sao paulo, brazil. ive been into programming for about 5 years now, started young and never really stopped since. i love building things from scratch, figuring out how stuff works, and making ideas come alive through code.
+                </p>
+                <p>
+                  besides coding, im really into designing. i like making things look clean and feel right, whether its a website, an interface, or just something visual. i also play football, been part of academy futsal, and that discipline carries over into everything i do.
+                </p>
+                <p>
+                  im the type of person who gets obsessed with something until i understand it. if its a new framework, a design tool, or even a football tactic, i dive in deep. i dont just want to use things, i want to know how they work and how to make them better.
                 </p>
               </div>
             </div>

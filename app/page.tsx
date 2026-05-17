@@ -102,7 +102,7 @@ export default function Home() {
           
           <ScrollReveal direction="up" delay={0.2}>
             <div className="flex flex-wrap justify-center gap-3">
-              {['TypeScript', 'React', 'Next.js', 'Node.js', 'Python', 'Tailwind CSS', 'PostgreSQL', 'MongoDB', 'Docker', 'Git'].map((tech, index) => (
+              {['Next.js', 'Node.js', 'Python', 'Git', 'TypeScript', 'React'].map((tech, index) => (
                 <span key={index} className="md-chip" style={{ animationDelay: `${0.05 * index}s` }}>
                   {tech}
                 </span>
