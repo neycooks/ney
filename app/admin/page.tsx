@@ -39,6 +39,7 @@ export default function AdminPage() {
           <AdminPanel
             onProjectCreated={() => {}}
             onSocialCreated={() => {}}
+            onFriendCreated={() => {}}
           />
         </ScrollReveal>
       </main>

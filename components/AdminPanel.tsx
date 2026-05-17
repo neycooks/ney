@@ -7,10 +7,11 @@ const icons = ['discord', 'github', 'codeberg', 'gitlab', 'roblox'];
 interface AdminPanelProps {
   onProjectCreated: () => void;
   onSocialCreated: () => void;
+  onFriendCreated: () => void;
 }
 
-export default function AdminPanel({ onProjectCreated, onSocialCreated }: AdminPanelProps) {
-  const [activeTab, setActiveTab] = useState<'project' | 'social'>('project');
+export default function AdminPanel({ onProjectCreated, onSocialCreated, onFriendCreated }: AdminPanelProps) {
+  const [activeTab, setActiveTab] = useState<'project' | 'social' | 'friend'>('project');
 
   return (
     <div className="md-card max-w-2xl mx-auto animate-scale-in">
@@ -18,7 +19,7 @@ export default function AdminPanel({ onProjectCreated, onSocialCreated }: AdminP
         Admin Panel
       </h2>
 
-      <div className="flex gap-2 mb-6">
+      <div className="flex gap-2 mb-6 flex-wrap">
         <button
           onClick={() => setActiveTab('project')}
           className={`md-chip ${activeTab === 'project' ? '!bg-[rgb(var(--md-sys-color-primary-container))] !text-[rgb(var(--md-sys-color-on-primary-container))]' : ''}`}
@@ -31,12 +32,20 @@ export default function AdminPanel({ onProjectCreated, onSocialCreated }: AdminP
         >
           Socials
         </button>
+        <button
+          onClick={() => setActiveTab('friend')}
+          className={`md-chip ${activeTab === 'friend' ? '!bg-[rgb(var(--md-sys-color-primary-container))] !text-[rgb(var(--md-sys-color-on-primary-container))]' : ''}`}
+        >
+          Friends
+        </button>
       </div>
 
       {activeTab === 'project' ? (
         <CreateProjectForm onSuccess={onProjectCreated} />
-      ) : (
+      ) : activeTab === 'social' ? (
         <CreateSocialForm onSuccess={onSocialCreated} />
+      ) : (
+        <CreateFriendForm onSuccess={onFriendCreated} />
       )}
     </div>
   );
@@ -264,6 +273,98 @@ function CreateSocialForm({ onSuccess }: { onSuccess: () => void }) {
 
       <button type="submit" disabled={loading} className="md-button w-full disabled:opacity-50">
         {loading ? 'Creating...' : 'Create Social'}
+      </button>
+    </form>
+  );
+}
+
+function CreateFriendForm({ onSuccess }: { onSuccess: () => void }) {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [pfp, setPfp] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!pfp) {
+      setError('Please upload a profile picture');
+      return;
+    }
+    setLoading(true);
+    setError('');
+
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('description', description);
+    formData.append('pfp', pfp);
+
+    const res = await fetch('/api/friends', {
+      method: 'POST',
+      body: formData,
+    });
+
+    setLoading(false);
+
+    if (!res.ok) {
+      const data = await res.json();
+      setError(data.error || 'Failed to create');
+      return;
+    }
+
+    setName('');
+    setDescription('');
+    setPfp(null);
+    onSuccess();
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-5">
+      <div>
+        <label className="block text-sm font-medium text-[rgb(var(--md-sys-color-on-surface-variant))] mb-2">
+          Name
+        </label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full px-4 py-3 rounded-xl bg-[rgb(var(--md-sys-color-surface-container-high))] border border-[rgb(var(--md-sys-color-outline-variant))] border-opacity-50 focus:border-[rgb(var(--md-sys-color-primary))] focus:outline-none focus:ring-2 focus:ring-[rgb(var(--md-sys-color-primary))] focus:ring-opacity-30 transition-all duration-200 text-[rgb(var(--md-sys-color-on-surface))]"
+          placeholder="Friend name"
+          required
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-[rgb(var(--md-sys-color-on-surface-variant))] mb-2">
+          Profile Picture
+        </label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setPfp(e.target.files?.[0] || null)}
+          className="w-full px-4 py-3 rounded-xl bg-[rgb(var(--md-sys-color-surface-container-high))] border border-[rgb(var(--md-sys-color-outline-variant))] border-opacity-50 focus:border-[rgb(var(--md-sys-color-primary))] focus:outline-none focus:ring-2 focus:ring-[rgb(var(--md-sys-color-primary))] focus:ring-opacity-30 transition-all duration-200 text-[rgb(var(--md-sys-color-on-surface))]"
+          required
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-[rgb(var(--md-sys-color-on-surface-variant))] mb-2">
+          What I think of them
+        </label>
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          rows={3}
+          className="w-full px-4 py-3 rounded-xl bg-[rgb(var(--md-sys-color-surface-container-high))] border border-[rgb(var(--md-sys-color-outline-variant))] border-opacity-50 focus:border-[rgb(var(--md-sys-color-primary))] focus:outline-none focus:ring-2 focus:ring-[rgb(var(--md-sys-color-primary))] focus:ring-opacity-30 transition-all duration-200 text-[rgb(var(--md-sys-color-on-surface))] resize-none"
+          placeholder="what i think of them..."
+          required
+        />
+      </div>
+
+      {error && <p className="text-red-400 text-sm text-center">{error}</p>}
+
+      <button type="submit" disabled={loading} className="md-button w-full disabled:opacity-50">
+        {loading ? 'Creating...' : 'Create Friend'}
       </button>
     </form>
   );

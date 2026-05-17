@@ -32,3 +32,11 @@ model Social {
   icon        String
   createdAt   DateTime @default(now())
 }
+
+model Friend {
+  id          String   @id @default(cuid())
+  name        String
+  pfpUrl      String
+  description String
+  createdAt   DateTime @default(now())
+}

@@ -11,6 +11,7 @@ const navItems = [
   { href: '/about', label: 'About' },
   { href: '/projects', label: 'Projects' },
   { href: '/socials', label: 'Socials' },
+  { href: '/friends', label: 'Friends' },
 ];
 
 export default function Navbar() {
