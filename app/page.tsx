@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ScrollReveal from '@/components/ScrollReveal';
 
 export default function Home() {
   return (
@@ -39,9 +40,11 @@ export default function Home() {
 
         {/* What I Do Section */}
         <section className="max-w-6xl mx-auto px-6 py-24">
-          <h2 className="font-display text-4xl md:text-5xl text-[rgb(var(--md-sys-color-on-surface))] mb-16 text-center opacity-0 animate-fade-in-up">
-            What I Do
-          </h2>
+          <ScrollReveal direction="up">
+            <h2 className="font-display text-4xl md:text-5xl text-[rgb(var(--md-sys-color-on-surface))] mb-16 text-center">
+              What I Do
+            </h2>
+          </ScrollReveal>
           
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -73,38 +76,40 @@ export default function Home() {
                 ),
               },
             ].map((item, index) => (
-              <div
-                key={index}
-                className="md-card opacity-0 animate-slide-in-blur"
-                style={{ animationDelay: `${0.2 + index * 0.15}s` }}
-              >
-                <div className="w-14 h-14 rounded-2xl bg-[rgb(var(--md-sys-color-primary-container))] flex items-center justify-center text-[rgb(var(--md-sys-color-on-primary-container))] mb-5 transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-6">
-                  {item.icon}
+              <ScrollReveal key={index} direction="blur" delay={index * 0.15}>
+                <div className="md-card group h-full">
+                  <div className="w-14 h-14 rounded-2xl bg-[rgb(var(--md-sys-color-primary-container))] flex items-center justify-center text-[rgb(var(--md-sys-color-on-primary-container))] mb-5 transition-all duration-500 ease-out group-hover:scale-110 group-hover:rotate-6">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold text-[rgb(var(--md-sys-color-on-surface))] mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
-                <h3 className="text-xl font-semibold text-[rgb(var(--md-sys-color-on-surface))] mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </section>
 
         {/* Tech Stack Section */}
         <section className="max-w-6xl mx-auto px-6 py-24">
-          <h2 className="font-display text-4xl md:text-5xl text-[rgb(var(--md-sys-color-on-surface))] mb-12 text-center opacity-0 animate-fade-in-up">
-            Tech Stack
-          </h2>
+          <ScrollReveal direction="up">
+            <h2 className="font-display text-4xl md:text-5xl text-[rgb(var(--md-sys-color-on-surface))] mb-12 text-center">
+              Tech Stack
+            </h2>
+          </ScrollReveal>
           
-          <div className="flex flex-wrap justify-center gap-3 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-            {['TypeScript', 'React', 'Next.js', 'Node.js', 'Python', 'Tailwind CSS', 'PostgreSQL', 'MongoDB', 'Docker', 'Git'].map((tech, index) => (
-              <span key={index} className="md-chip" style={{ animationDelay: `${0.05 * index}s` }}>
-                {tech}
-              </span>
-            ))}
-          </div>
+          <ScrollReveal direction="up" delay={0.2}>
+            <div className="flex flex-wrap justify-center gap-3">
+              {['TypeScript', 'React', 'Next.js', 'Node.js', 'Python', 'Tailwind CSS', 'PostgreSQL', 'MongoDB', 'Docker', 'Git'].map((tech, index) => (
+                <span key={index} className="md-chip" style={{ animationDelay: `${0.05 * index}s` }}>
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </ScrollReveal>
         </section>
       </main>
 

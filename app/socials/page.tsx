@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ScrollReveal from '@/components/ScrollReveal';
 
 const socials = [
   {
@@ -72,63 +73,69 @@ export default function Socials() {
       <main className="pt-28 max-w-6xl mx-auto px-6 py-12">
         {/* Header */}
         <div className="mb-20 text-center">
-          <h1 className="font-display text-5xl md:text-7xl text-[rgb(var(--md-sys-color-primary))] mb-4 opacity-0 animate-fade-in-up">
-            Socials
-          </h1>
-          <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] text-lg opacity-0 animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
-            Let&apos;s connect and build something together
-          </p>
+          <ScrollReveal direction="up">
+            <h1 className="font-display text-5xl md:text-7xl text-[rgb(var(--md-sys-color-primary))] mb-4">
+              Socials
+            </h1>
+          </ScrollReveal>
+          <ScrollReveal direction="up" delay={0.15}>
+            <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] text-lg">
+              Let&apos;s connect and build something together
+            </p>
+          </ScrollReveal>
         </div>
 
         {/* Socials Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {socials.map((social, index) => (
-            <a
-              key={index}
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="md-card group opacity-0 animate-scale-in"
-              style={{ animationDelay: `${0.2 + index * 0.1}s` }}
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 rounded-2xl bg-[rgb(var(--md-sys-color-primary-container))] flex items-center justify-center text-[rgb(var(--md-sys-color-on-primary-container))] transition-all duration-500 ease-out group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-lg">
-                  {social.icon}
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-[rgb(var(--md-sys-color-on-surface))] transition-colors duration-300 group-hover:text-[rgb(var(--md-sys-color-primary))]">
-                    {social.name}
-                  </h3>
-                  <div className="flex items-center gap-1 text-[rgb(var(--md-sys-color-on-surface-variant))] text-sm">
-                    <svg className="w-3 h-3 transition-transform duration-300 ease-out group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                    Visit
+            <ScrollReveal key={index} direction="scale" delay={index * 0.1}>
+              <a
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="md-card group"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-2xl bg-[rgb(var(--md-sys-color-primary-container))] flex items-center justify-center text-[rgb(var(--md-sys-color-on-primary-container))] transition-all duration-500 ease-out group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-lg">
+                    {social.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-[rgb(var(--md-sys-color-on-surface))] transition-colors duration-300 group-hover:text-[rgb(var(--md-sys-color-primary))]">
+                      {social.name}
+                    </h3>
+                    <div className="flex items-center gap-1 text-[rgb(var(--md-sys-color-on-surface-variant))] text-sm">
+                      <svg className="w-3 h-3 transition-transform duration-300 ease-out group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                      Visit
+                    </div>
                   </div>
                 </div>
-              </div>
-              <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] text-sm leading-relaxed">
-                {social.description}
-              </p>
-            </a>
+                <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] text-sm leading-relaxed">
+                  {social.description}
+                </p>
+              </a>
+            </ScrollReveal>
           ))}
         </div>
 
         {/* CTA */}
-        <div className="mt-20 text-center opacity-0 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-          <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] mb-2">
-            Prefer a direct message?
-          </p>
-          <a
-            href="mailto:hello@ney.dev"
-            className="md-button inline-flex items-center gap-2"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            Send Email
-          </a>
-        </div>
+        <ScrollReveal direction="up" delay={0.6}>
+          <div className="mt-20 text-center">
+            <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] mb-2">
+              Prefer a direct message?
+            </p>
+            <a
+              href="mailto:hello@ney.dev"
+              className="md-button inline-flex items-center gap-2"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Send Email
+            </a>
+          </div>
+        </ScrollReveal>
       </main>
 
       <Footer />

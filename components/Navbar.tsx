@@ -3,6 +3,10 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from './ThemeProvider';
+import dynamic from 'next/dynamic';
+import { useRef } from 'react';
+
+const LiquidGlass = dynamic(() => import('liquid-glass-react'), { ssr: false });
 
 const navItems = [
   { href: '/', label: 'Home' },
@@ -14,11 +18,27 @@ const navItems = [
 export default function Navbar() {
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <header className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
-      <nav className="bg-[rgb(var(--md-sys-color-surface-container))] bg-opacity-80 backdrop-blur-xl rounded-full px-6 py-3 shadow-lg border border-[rgb(var(--md-sys-color-outline-variant))] border-opacity-20 transition-all duration-500 ease-out">
-        <div className="flex items-center gap-8">
+    <header ref={containerRef} className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
+      <LiquidGlass
+        mouseContainer={containerRef}
+        elasticity={0.3}
+        cornerRadius={999}
+        displacementScale={50}
+        blurAmount={0.08}
+        saturation={140}
+        aberrationIntensity={1.5}
+        mode="standard"
+        overLight={theme === 'light'}
+        padding="0"
+        className="!bg-transparent !border-0"
+        style={{
+          position: 'relative',
+        }}
+      >
+        <nav className="flex items-center gap-8 px-6 py-3">
           <Link href="/" className="font-display text-xl text-[rgb(var(--md-sys-color-primary))] hover:opacity-80 transition-all duration-300 ease-out hover:scale-110">
             ney
           </Link>
@@ -39,7 +59,7 @@ export default function Navbar() {
 
           <button
             onClick={toggleTheme}
-            className="w-9 h-9 rounded-full bg-[rgb(var(--md-sys-color-surface-container-highest))] flex items-center justify-center hover:bg-[rgb(var(--md-sys-color-primary-container))] hover:text-[rgb(var(--md-sys-color-on-primary-container))] transition-all duration-300 ease-out active:scale-90 hover:scale-110 hover:rotate-12"
+            className="w-9 h-9 rounded-full bg-[rgb(var(--md-sys-color-surface-container-highest))] bg-opacity-50 flex items-center justify-center hover:bg-[rgb(var(--md-sys-color-primary-container))] hover:text-[rgb(var(--md-sys-color-on-primary-container))] transition-all duration-300 ease-out active:scale-90 hover:scale-110 hover:rotate-12"
             aria-label="Toggle theme"
           >
             {theme === 'dark' ? (
@@ -52,8 +72,8 @@ export default function Navbar() {
               </svg>
             )}
           </button>
-        </div>
-      </nav>
+        </nav>
+      </LiquidGlass>
     </header>
   );
 }
