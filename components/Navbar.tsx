@@ -75,8 +75,8 @@ export default function Navbar() {
             inset ${refractionX}px ${refractionY}px 20px rgba(255, 255, 255, 0.03)
           `,
           transform: isHovered
-            ? `translateX(-50%) scale(1.02) perspective(1000px) rotateX(${(mousePos.y - 0.5) * -3}deg) rotateY(${(mousePos.x - 0.5) * 3}deg)`
-            : 'translateX(-50%) scale(1)',
+            ? `scale(1.02) perspective(1000px) rotateX(${(mousePos.y - 0.5) * -3}deg) rotateY(${(mousePos.x - 0.5) * 3}deg)`
+            : 'scale(1)',
           transition: 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease-out',
         }}
       >
