@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import { Tangerine } from 'next/font/google';
 import { ThemeProvider } from '@/components/ThemeProvider';
 
 const anthropicSherif = localFont({
@@ -26,6 +27,13 @@ const copernicusCond = localFont({
   display: 'swap',
 });
 
+const tangerine = Tangerine({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  variable: '--font-tangerine',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: 'Ney | Developer Portfolio',
   description: 'Personal portfolio of Ney - Developer & Creator',
@@ -38,7 +46,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${anthropicSherif.variable} ${copernicusCond.variable} font-sans antialiased`}>
+      <body className={`${anthropicSherif.variable} ${copernicusCond.variable} ${tangerine.variable} font-sans antialiased`}>
         <ThemeProvider>
           {children}
         </ThemeProvider>

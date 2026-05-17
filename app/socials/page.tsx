@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import ScrollReveal from '@/components/ScrollReveal';
 
 interface Social {
@@ -126,8 +125,6 @@ export default function Socials() {
           </div>
         </ScrollReveal>
       </main>
-
-      <Footer />
     </div>
   );
 }

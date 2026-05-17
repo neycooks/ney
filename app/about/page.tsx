@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import ScrollReveal from '@/components/ScrollReveal';
 
 export default function About() {
@@ -139,8 +138,6 @@ export default function About() {
           </div>
         </ScrollReveal>
       </main>
-
-      <Footer />
     </div>
   );
 }

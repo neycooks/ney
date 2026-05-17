@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import AdminPanel from '@/components/AdminPanel';
 import ScrollReveal from '@/components/ScrollReveal';
 
@@ -43,8 +42,6 @@ export default function AdminPage() {
           />
         </ScrollReveal>
       </main>
-
-      <Footer />
     </div>
   );
 }

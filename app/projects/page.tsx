@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import ScrollReveal from '@/components/ScrollReveal';
 
 interface Project {
@@ -108,8 +107,6 @@ export default function Projects() {
           </div>
         </ScrollReveal>
       </main>
-
-      <Footer />
     </div>
   );
 }
