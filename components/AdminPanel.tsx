@@ -8,10 +8,11 @@ interface AdminPanelProps {
   onProjectCreated: () => void;
   onSocialCreated: () => void;
   onFriendCreated: () => void;
+  onFontCreated: () => void;
 }
 
-export default function AdminPanel({ onProjectCreated, onSocialCreated, onFriendCreated }: AdminPanelProps) {
-  const [activeTab, setActiveTab] = useState<'project' | 'social' | 'friend'>('project');
+export default function AdminPanel({ onProjectCreated, onSocialCreated, onFriendCreated, onFontCreated }: AdminPanelProps) {
+  const [activeTab, setActiveTab] = useState<'project' | 'social' | 'friend' | 'font'>('project');
 
   return (
     <div className="md-card max-w-2xl mx-auto animate-scale-in">
@@ -38,14 +39,22 @@ export default function AdminPanel({ onProjectCreated, onSocialCreated, onFriend
         >
           Friends
         </button>
+        <button
+          onClick={() => setActiveTab('font')}
+          className={`md-chip ${activeTab === 'font' ? '!bg-[rgb(var(--md-sys-color-primary-container))] !text-[rgb(var(--md-sys-color-on-primary-container))]' : ''}`}
+        >
+          Fonts
+        </button>
       </div>
 
       {activeTab === 'project' ? (
         <CreateProjectForm onSuccess={onProjectCreated} />
       ) : activeTab === 'social' ? (
         <CreateSocialForm onSuccess={onSocialCreated} />
-      ) : (
+      ) : activeTab === 'friend' ? (
         <CreateFriendForm onSuccess={onFriendCreated} />
+      ) : (
+        <CreateFontForm onSuccess={onFontCreated} />
       )}
     </div>
   );
@@ -365,6 +374,149 @@ function CreateFriendForm({ onSuccess }: { onSuccess: () => void }) {
 
       <button type="submit" disabled={loading} className="md-button w-full disabled:opacity-50">
         {loading ? 'Creating...' : 'Create Friend'}
+      </button>
+    </form>
+  );
+}
+
+function CreateFontForm({ onSuccess }: { onSuccess: () => void }) {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [files, setFiles] = useState<File[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [isDragOver, setIsDragOver] = useState(false);
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    const dropped = Array.from(e.dataTransfer.files).filter(f =>
+      /\.(ttf|otf|woff|woff2)$/i.test(f.name)
+    );
+    setFiles(prev => [...prev, ...dropped]);
+  };
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const selected = Array.from(e.target.files).filter(f =>
+        /\.(ttf|otf|woff|woff2)$/i.test(f.name)
+      );
+      setFiles(prev => [...prev, ...selected]);
+    }
+  };
+
+  const removeFile = (index: number) => {
+    setFiles(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!files.length) {
+      setError('Please upload at least one font file');
+      return;
+    }
+    setLoading(true);
+    setError('');
+
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('description', description);
+    files.forEach(f => formData.append('files', f));
+
+    const res = await fetch('/api/fonts', { method: 'POST', body: formData });
+    setLoading(false);
+
+    if (!res.ok) {
+      const data = await res.json();
+      setError(data.error || 'Failed to create');
+      return;
+    }
+
+    setName('');
+    setDescription('');
+    setFiles([]);
+    onSuccess();
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-5">
+      <div>
+        <label className="block text-sm font-medium text-[rgb(var(--md-sys-color-on-surface-variant))] mb-2">
+          Font Name
+        </label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full px-4 py-3 rounded-xl bg-[rgb(var(--md-sys-color-surface-container-high))] border border-[rgb(var(--md-sys-color-outline-variant))] border-opacity-50 focus:border-[rgb(var(--md-sys-color-primary))] focus:outline-none focus:ring-2 focus:ring-[rgb(var(--md-sys-color-primary))] focus:ring-opacity-30 transition-all duration-200 text-[rgb(var(--md-sys-color-on-surface))]"
+          placeholder="e.g. Cool Font"
+          required
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-[rgb(var(--md-sys-color-on-surface-variant))] mb-2">
+          Description
+        </label>
+        <input
+          type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="w-full px-4 py-3 rounded-xl bg-[rgb(var(--md-sys-color-surface-container-high))] border border-[rgb(var(--md-sys-color-outline-variant))] border-opacity-50 focus:border-[rgb(var(--md-sys-color-primary))] focus:outline-none focus:ring-2 focus:ring-[rgb(var(--md-sys-color-primary))] focus:ring-opacity-30 transition-all duration-200 text-[rgb(var(--md-sys-color-on-surface))]"
+          placeholder="what this font is like..."
+          required
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-[rgb(var(--md-sys-color-on-surface-variant))] mb-2">
+          Font Files
+        </label>
+        <div
+          onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
+          onDragLeave={() => setIsDragOver(false)}
+          onDrop={handleDrop}
+          className={`border-2 border-dashed rounded-xl p-6 text-center transition-all duration-200 cursor-pointer ${
+            isDragOver
+              ? 'border-[rgb(var(--md-sys-color-primary))] bg-[rgb(var(--md-sys-color-primary-container))]'
+              : 'border-[rgb(var(--md-sys-color-outline-variant))] hover:border-[rgb(var(--md-sys-color-primary))]'
+          }`}
+          onClick={() => document.getElementById('font-file-input')?.click()}
+        >
+          <input
+            id="font-file-input"
+            type="file"
+            accept=".ttf,.otf,.woff,.woff2"
+            multiple
+            onChange={handleFileSelect}
+            className="hidden"
+          />
+          <p className="text-[rgb(var(--md-sys-color-on-surface-variant))]">
+            {isDragOver ? 'Drop files here!' : 'Drag & drop font files or click to select'}
+          </p>
+          <p className="text-sm text-[rgb(var(--md-sys-color-on-surface-variant))] opacity-60 mt-1">
+            .ttf, .otf, .woff, .woff2
+          </p>
+        </div>
+
+        {files.length > 0 && (
+          <div className="mt-3 space-y-2">
+            {files.map((f, i) => (
+              <div key={i} className="flex items-center justify-between px-4 py-2 bg-[rgb(var(--md-sys-color-surface-container-high))] rounded-lg">
+                <span className="text-sm text-[rgb(var(--md-sys-color-on-surface))]">{f.name}</span>
+                <button type="button" onClick={() => removeFile(i)} className="text-red-400 hover:text-red-300 text-sm">
+                  remove
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {error && <p className="text-red-400 text-sm text-center">{error}</p>}
+
+      <button type="submit" disabled={loading} className="md-button w-full disabled:opacity-50">
+        {loading ? 'Creating...' : 'Create Font'}
       </button>
     </form>
   );

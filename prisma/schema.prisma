@@ -40,3 +40,11 @@ model Friend {
   description String
   createdAt   DateTime @default(now())
 }
+
+model Font {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  files       Json     // array of { name, url, type }
+  createdAt   DateTime @default(now())
+}

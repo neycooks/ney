@@ -40,6 +40,7 @@ export default function AdminPage() {
             onProjectCreated={() => {}}
             onSocialCreated={() => {}}
             onFriendCreated={() => {}}
+            onFontCreated={() => {}}
           />
         </ScrollReveal>
       </main>
