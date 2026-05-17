@@ -255,6 +255,12 @@
 .stagger-7 { animation-delay: 0.7s; }
 .stagger-8 { animation-delay: 0.8s; }
 
+.tangerine-bold {
+  font-family: "Tangerine", cursive;
+  font-weight: 700;
+  font-style: normal;
+}
+
 @layer components {
   [data-liquid-glass] {
     backdrop-filter: blur(20px) saturate(180%);

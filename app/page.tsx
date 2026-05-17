@@ -19,7 +19,7 @@ export default function Home() {
             <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] text-lg md:text-xl mb-6 opacity-0 animate-fade-in-up stagger-1">
               Hello, I&apos;m
             </p>
-            <h1 className="font-[--font-tangerine] font-bold text-7xl md:text-9xl lg:text-[12rem] text-[rgb(var(--md-sys-color-primary))] mb-8 opacity-0 animate-fade-in-up stagger-2 leading-none">
+            <h1 className="tangerine-bold text-7xl md:text-9xl lg:text-[12rem] text-[rgb(var(--md-sys-color-primary))] mb-8 opacity-0 animate-fade-in-up stagger-2 leading-none">
               Ney
             </h1>
             <p className="text-[rgb(var(--md-sys-color-on-surface))] text-xl md:text-2xl max-w-2xl mx-auto opacity-0 animate-fade-in-up stagger-3 leading-relaxed">
