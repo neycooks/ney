@@ -4,41 +4,46 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-hidden">
       <Navbar />
       
-      <main className="pt-24">
-        {/* Hero Section */}
-        <section className="max-w-6xl mx-auto px-6 py-20 md:py-32">
-          <div className="animate-fade-in">
-            <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] text-lg md:text-xl mb-4 opacity-0 stagger-1 animate-slide-up">
-              Hello, I&apos;m
-            </p>
-            <h1 className="font-display text-6xl md:text-8xl lg:text-9xl text-[rgb(var(--md-sys-color-primary))] mb-6 opacity-0 stagger-2 animate-slide-up">
-              Ney
-            </h1>
-            <p className="text-[rgb(var(--md-sys-color-on-surface))] text-xl md:text-2xl max-w-2xl opacity-0 stagger-3 animate-slide-up">
-              Developer & Creator crafting digital experiences with clean code and thoughtful design.
-            </p>
+      <main>
+        {/* Hero Section - Centered */}
+        <section className="min-h-screen flex items-center justify-center px-6 relative">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[rgb(var(--md-sys-color-primary))] opacity-5 rounded-full blur-3xl animate-float" />
+            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[rgb(var(--md-sys-color-tertiary))] opacity-5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
           </div>
 
-          <div className="mt-12 flex flex-wrap gap-4 opacity-0 stagger-4 animate-slide-up">
-            <Link href="/projects" className="md-button">
-              View Projects
-            </Link>
-            <Link href="/contact" className="md-button-tonal">
-              Get in Touch
-            </Link>
+          <div className="text-center max-w-4xl relative z-10">
+            <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] text-lg md:text-xl mb-6 opacity-0 animate-fade-in-up stagger-1">
+              Hello, I&apos;m
+            </p>
+            <h1 className="font-display text-7xl md:text-9xl lg:text-[12rem] text-[rgb(var(--md-sys-color-primary))] mb-8 opacity-0 animate-fade-in-up stagger-2 leading-none">
+              Ney
+            </h1>
+            <p className="text-[rgb(var(--md-sys-color-on-surface))] text-xl md:text-2xl max-w-2xl mx-auto opacity-0 animate-fade-in-up stagger-3 leading-relaxed">
+              Developer &amp; Creator crafting digital experiences with clean code and thoughtful design.
+            </p>
+
+            <div className="mt-12 flex flex-wrap justify-center gap-4 opacity-0 animate-fade-in-up stagger-4">
+              <Link href="/projects" className="md-button">
+                View Projects
+              </Link>
+              <Link href="/socials" className="md-button-tonal">
+                Connect
+              </Link>
+            </div>
           </div>
         </section>
 
-        {/* Quick Links Section */}
-        <section className="max-w-6xl mx-auto px-6 py-16">
-          <h2 className="font-display text-4xl md:text-5xl text-[rgb(var(--md-sys-color-on-surface))] mb-12 opacity-0 stagger-5 animate-slide-up">
+        {/* What I Do Section */}
+        <section className="max-w-6xl mx-auto px-6 py-24">
+          <h2 className="font-display text-4xl md:text-5xl text-[rgb(var(--md-sys-color-on-surface))] mb-16 text-center opacity-0 animate-fade-in-up">
             What I Do
           </h2>
           
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
               {
                 title: 'Development',
@@ -70,16 +75,16 @@ export default function Home() {
             ].map((item, index) => (
               <div
                 key={index}
-                className="md-card opacity-0 animate-scale-in"
-                style={{ animationDelay: `${0.15 + index * 0.1}s` }}
+                className="md-card opacity-0 animate-slide-in-blur"
+                style={{ animationDelay: `${0.2 + index * 0.15}s` }}
               >
-                <div className="text-[rgb(var(--md-sys-color-primary))] mb-4">
+                <div className="w-14 h-14 rounded-2xl bg-[rgb(var(--md-sys-color-primary-container))] flex items-center justify-center text-[rgb(var(--md-sys-color-on-primary-container))] mb-5 transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-6">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-[rgb(var(--md-sys-color-on-surface))] mb-2">
+                <h3 className="text-xl font-semibold text-[rgb(var(--md-sys-color-on-surface))] mb-3">
                   {item.title}
                 </h3>
-                <p className="text-[rgb(var(--md-sys-color-on-surface-variant))]">
+                <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -88,14 +93,14 @@ export default function Home() {
         </section>
 
         {/* Tech Stack Section */}
-        <section className="max-w-6xl mx-auto px-6 py-16">
-          <h2 className="font-display text-4xl md:text-5xl text-[rgb(var(--md-sys-color-on-surface))] mb-8 opacity-0 stagger-5 animate-slide-up">
+        <section className="max-w-6xl mx-auto px-6 py-24">
+          <h2 className="font-display text-4xl md:text-5xl text-[rgb(var(--md-sys-color-on-surface))] mb-12 text-center opacity-0 animate-fade-in-up">
             Tech Stack
           </h2>
           
-          <div className="flex flex-wrap gap-3 opacity-0 animate-slide-up" style={{ animationDelay: '0.3s' }}>
+          <div className="flex flex-wrap justify-center gap-3 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
             {['TypeScript', 'React', 'Next.js', 'Node.js', 'Python', 'Tailwind CSS', 'PostgreSQL', 'MongoDB', 'Docker', 'Git'].map((tech, index) => (
-              <span key={index} className="md-chip">
+              <span key={index} className="md-chip" style={{ animationDelay: `${0.05 * index}s` }}>
                 {tech}
               </span>
             ))}

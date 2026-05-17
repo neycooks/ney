@@ -4,27 +4,27 @@ import Footer from '@/components/Footer';
 
 export default function About() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-hidden">
       <Navbar />
       
-      <main className="pt-24 max-w-6xl mx-auto px-6 py-12">
+      <main className="pt-28 max-w-6xl mx-auto px-6 py-12">
         {/* Header */}
-        <div className="mb-16 animate-fade-in">
-          <h1 className="font-display text-5xl md:text-7xl text-[rgb(var(--md-sys-color-primary))] mb-4 opacity-0 animate-slide-up">
+        <div className="mb-20 text-center">
+          <h1 className="font-display text-5xl md:text-7xl text-[rgb(var(--md-sys-color-primary))] mb-4 opacity-0 animate-fade-in-up">
             About Me
           </h1>
-          <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] text-lg opacity-0 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+          <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] text-lg opacity-0 animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
             Get to know me a bit better
           </p>
         </div>
 
         {/* Bio Section */}
-        <div className="grid md:grid-cols-2 gap-12 mb-16">
-          <div className="opacity-0 animate-slide-in-left">
-            <h2 className="text-2xl font-semibold text-[rgb(var(--md-sys-color-on-surface))] mb-4">
+        <div className="grid md:grid-cols-2 gap-16 mb-20">
+          <div className="opacity-0 animate-fade-in-left">
+            <h2 className="text-2xl font-semibold text-[rgb(var(--md-sys-color-on-surface))] mb-6">
               Who am I?
             </h2>
-            <div className="space-y-4 text-[rgb(var(--md-sys-color-on-surface-variant))] leading-relaxed">
+            <div className="space-y-5 text-[rgb(var(--md-sys-color-on-surface-variant))] leading-relaxed">
               <p>
                 I&apos;m Ney, a passionate developer who loves building things that live on the internet. 
                 I specialize in creating elegant, efficient, and user-friendly applications.
@@ -41,7 +41,7 @@ export default function About() {
             </div>
           </div>
 
-          <div className="opacity-0 animate-slide-in-right">
+          <div className="opacity-0 animate-fade-in-right">
             <div className="md-card">
               <h3 className="text-xl font-semibold text-[rgb(var(--md-sys-color-on-surface))] mb-6">
                 Quick Facts
@@ -49,11 +49,11 @@ export default function About() {
               <div className="space-y-4">
                 {[
                   { label: 'Name', value: 'Ney' },
-                  { label: 'Role', value: 'Developer & Creator' },
+                  { label: 'Role', value: 'Developer &amp; Creator' },
                   { label: 'Location', value: 'Earth' },
                   { label: 'Experience', value: 'Building cool stuff' },
                 ].map((fact, index) => (
-                  <div key={index} className="flex justify-between items-center py-2 border-b border-[rgb(var(--md-sys-color-outline-variant))] border-opacity-30">
+                  <div key={index} className="flex justify-between items-center py-3 border-b border-[rgb(var(--md-sys-color-outline-variant))] border-opacity-30 transition-all duration-300 ease-out hover:pl-2">
                     <span className="text-[rgb(var(--md-sys-color-on-surface-variant))]">{fact.label}</span>
                     <span className="text-[rgb(var(--md-sys-color-on-surface))] font-medium">{fact.value}</span>
                   </div>
@@ -64,9 +64,9 @@ export default function About() {
         </div>
 
         {/* Skills Section */}
-        <div className="mb-16 opacity-0 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-          <h2 className="text-2xl font-semibold text-[rgb(var(--md-sys-color-on-surface))] mb-6">
-            Skills & Expertise
+        <div className="mb-20 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <h2 className="text-2xl font-semibold text-[rgb(var(--md-sys-color-on-surface))] mb-8 text-center">
+            Skills &amp; Expertise
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
@@ -79,11 +79,11 @@ export default function About() {
                 skills: ['Node.js', 'Python', 'REST APIs', 'Database Design'],
               },
               {
-                category: 'Tools & Others',
+                category: 'Tools &amp; Others',
                 skills: ['Git', 'Docker', 'Linux', 'CI/CD', 'Agile'],
               },
             ].map((group, index) => (
-              <div key={index} className="md-card">
+              <div key={index} className="md-card opacity-0 animate-scale-in" style={{ animationDelay: `${0.3 + index * 0.1}s` }}>
                 <h3 className="text-lg font-semibold text-[rgb(var(--md-sys-color-primary))] mb-4">
                   {group.category}
                 </h3>
@@ -100,13 +100,13 @@ export default function About() {
         </div>
 
         {/* Interests */}
-        <div className="opacity-0 animate-slide-up" style={{ animationDelay: '0.3s' }}>
-          <h2 className="text-2xl font-semibold text-[rgb(var(--md-sys-color-on-surface))] mb-6">
+        <div className="opacity-0 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+          <h2 className="text-2xl font-semibold text-[rgb(var(--md-sys-color-on-surface))] mb-8 text-center">
             Interests
           </h2>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap justify-center gap-3">
             {['Open Source', 'Web Development', 'UI/UX Design', 'Problem Solving', 'Learning New Tech', 'Building Products'].map((interest, index) => (
-              <span key={index} className="md-chip">
+              <span key={index} className="md-chip" style={{ animationDelay: `${0.05 * index}s` }}>
                 {interest}
               </span>
             ))}
@@ -114,15 +114,15 @@ export default function About() {
         </div>
 
         {/* CTA */}
-        <div className="mt-16 text-center opacity-0 animate-slide-up" style={{ animationDelay: '0.4s' }}>
+        <div className="mt-20 text-center opacity-0 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
           <h2 className="text-2xl font-semibold text-[rgb(var(--md-sys-color-on-surface))] mb-4">
             Want to work together?
           </h2>
           <p className="text-[rgb(var(--md-sys-color-on-surface-variant))] mb-6">
             I&apos;m always open to new opportunities and collaborations.
           </p>
-          <Link href="/contact" className="md-button">
-            Let&apos;s Talk
+          <Link href="/socials" className="md-button">
+            Let&apos;s Connect
           </Link>
         </div>
       </main>
