@@ -81,7 +81,7 @@ export default function Socials() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="md-card group"
+                  className="bg-[rgb(var(--md-sys-color-surface-container))] rounded-[28px] p-6 transition-all duration-500 ease-out hover:shadow-lg hover:-translate-y-1 group"
                 >
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-14 h-14 rounded-2xl bg-[rgb(var(--md-sys-color-primary-container))] flex items-center justify-center text-[rgb(var(--md-sys-color-on-primary-container))] transition-all duration-500 ease-out group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-lg">

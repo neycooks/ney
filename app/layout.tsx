@@ -27,7 +27,7 @@ const copernicusCond = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'Ney | Developer Portfolio',
+  title: 'Ney',
   description: 'Personal portfolio of Ney - Developer & Creator',
 };
 
