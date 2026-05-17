@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --md-sys-color-primary: 123 79 168;
+    --md-sys-color-on-primary: 255 255 255;
+    --md-sys-color-primary-container: 234 221 245;
+    --md-sys-color-on-primary-container: 56 35 76;
+    --md-sys-color-secondary: 108 91 125;
+    --md-sys-color-on-secondary: 255 255 255;
+    --md-sys-color-secondary-container: 244 224 255;
+    --md-sys-color-on-secondary-container: 43 28 56;
+    --md-sys-color-tertiary: 145 114 165;
+    --md-sys-color-on-tertiary: 255 255 255;
+    --md-sys-color-tertiary-container: 248 232 255;
+    --md-sys-color-on-tertiary-container: 58 38 76;
+    --md-sys-color-surface: 255 251 255;
+    --md-sys-color-on-surface: 28 27 31;
+    --md-sys-color-surface-variant: 234 229 239;
+    --md-sys-color-on-surface-variant: 75 72 79;
+    --md-sys-color-surface-container: 243 239 247;
+    --md-sys-color-surface-container-high: 237 233 242;
+    --md-sys-color-surface-container-highest: 226 222 231;
+    --md-sys-color-outline: 124 121 128;
+    --md-sys-color-outline-variant: 204 200 209;
+    --md-sys-color-inverse-surface: 49 48 52;
+    --md-sys-color-inverse-on-surface: 244 240 247;
+    --md-sys-color-inverse-primary: 210 188 234;
+    --md-sys-color-shadow: 0 0 0;
+    --md-sys-color-scrim: 0 0 0;
+  }
+
+  [data-theme="dark"] {
+    --md-sys-color-primary: 210 188 234;
+    --md-sys-color-on-primary: 68 44 96;
+    --md-sys-color-primary-container: 95 61 133;
+    --md-sys-color-on-primary-container: 234 221 245;
+    --md-sys-color-secondary: 200 182 218;
+    --md-sys-color-on-secondary: 55 40 70;
+    --md-sys-color-secondary-container: 81 65 98;
+    --md-sys-color-on-secondary-container: 244 224 255;
+    --md-sys-color-tertiary: 218 190 240;
+    --md-sys-color-on-tertiary: 74 51 94;
+    --md-sys-color-tertiary-container: 117 87 138;
+    --md-sys-color-on-tertiary-container: 248 232 255;
+    --md-sys-color-surface: 20 19 23;
+    --md-sys-color-on-surface: 230 226 233;
+    --md-sys-color-surface-variant: 75 72 79;
+    --md-sys-color-on-surface-variant: 204 200 209;
+    --md-sys-color-surface-container: 28 27 31;
+    --md-sys-color-surface-container-high: 38 37 41;
+    --md-sys-color-surface-container-highest: 49 48 52;
+    --md-sys-color-outline: 150 147 154;
+    --md-sys-color-outline-variant: 75 72 79;
+    --md-sys-color-inverse-surface: 230 226 233;
+    --md-sys-color-inverse-on-surface: 49 48 52;
+    --md-sys-color-inverse-primary: 123 79 168;
+    --md-sys-color-shadow: 0 0 0;
+    --md-sys-color-scrim: 0 0 0;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-[rgb(var(--md-sys-color-outline-variant))];
+  }
+
+  body {
+    @apply bg-[rgb(var(--md-sys-color-surface))] text-[rgb(var(--md-sys-color-on-surface))] transition-colors duration-300;
+  }
+}
+
+@layer components {
+  .md-card {
+    @apply bg-[rgb(var(--md-sys-color-surface-container))] rounded-[28px] p-6 transition-all duration-300 hover:shadow-lg;
+  }
+
+  .md-button {
+    @apply bg-[rgb(var(--md-sys-color-primary))] text-[rgb(var(--md-sys-color-on-primary))] rounded-full px-6 py-3 font-medium transition-all duration-200 hover:shadow-md active:scale-95;
+  }
+
+  .md-button-tonal {
+    @apply bg-[rgb(var(--md-sys-color-secondary-container))] text-[rgb(var(--md-sys-color-on-secondary-container))] rounded-full px-6 py-3 font-medium transition-all duration-200 hover:shadow-md active:scale-95;
+  }
+
+  .md-chip {
+    @apply bg-[rgb(var(--md-sys-color-surface-container-high))] text-[rgb(var(--md-sys-color-on-surface-variant))] rounded-[12px] px-4 py-2 text-sm transition-all duration-200 hover:bg-[rgb(var(--md-sys-color-surface-container-highest))];
+  }
+
+  .md-nav-item {
+    @apply text-[rgb(var(--md-sys-color-on-surface-variant))] hover:text-[rgb(var(--md-sys-color-primary))] transition-colors duration-200 font-medium;
+  }
+
+  .md-nav-item-active {
+    @apply text-[rgb(var(--md-sys-color-primary))] font-semibold;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s cubic-bezier(0.2, 0, 0, 1) forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.5s cubic-bezier(0.2, 0, 0, 1) forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.5s cubic-bezier(0.2, 0, 0, 1) forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s cubic-bezier(0.2, 0, 0, 1) forwards;
+  }
+
+  .stagger-1 { animation-delay: 0.05s; }
+  .stagger-2 { animation-delay: 0.1s; }
+  .stagger-3 { animation-delay: 0.15s; }
+  .stagger-4 { animation-delay: 0.2s; }
+  .stagger-5 { animation-delay: 0.25s; }
+  .stagger-6 { animation-delay: 0.3s; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
