@@ -16,13 +16,13 @@
     --md-sys-color-on-tertiary: 255 255 255;
     --md-sys-color-tertiary-container: 248 232 255;
     --md-sys-color-on-tertiary-container: 58 38 76;
-    --md-sys-color-surface: 252 248 255;
+    --md-sys-color-surface: 248 242 255;
     --md-sys-color-on-surface: 28 27 31;
-    --md-sys-color-surface-variant: 232 227 240;
+    --md-sys-color-surface-variant: 228 222 238;
     --md-sys-color-on-surface-variant: 75 72 79;
-    --md-sys-color-surface-container: 240 235 248;
-    --md-sys-color-surface-container-high: 234 229 243;
-    --md-sys-color-surface-container-highest: 223 218 232;
+    --md-sys-color-surface-container: 236 228 246;
+    --md-sys-color-surface-container-high: 228 220 240;
+    --md-sys-color-surface-container-highest: 216 208 230;
     --md-sys-color-outline: 124 121 128;
     --md-sys-color-outline-variant: 204 200 209;
     --md-sys-color-inverse-surface: 49 48 52;

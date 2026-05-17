@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from './ThemeProvider';
 import { useRef, useState, useEffect, useCallback } from 'react';
+import LoginModal from './LoginModal';
 
 const navItems = [
   { href: '/', label: 'Home' },
@@ -18,6 +19,14 @@ export default function Navbar() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
   const [isHovered, setIsHovered] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    fetch('/api/auth/session').then((r) => r.json()).then((d) => {
+      if (d.authenticated) setIsAdmin(d.isAdmin);
+    });
+  }, []);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!containerRef.current) return;
@@ -54,106 +63,135 @@ export default function Navbar() {
   const refractionY = (mousePos.y - 0.5) * 10;
   const fresnelIntensity = isHovered ? 0.15 : 0.08;
 
+  const handleLoginSuccess = () => {
+    fetch('/api/auth/session').then((r) => r.json()).then((d) => {
+      if (d.authenticated) setIsAdmin(d.isAdmin);
+    });
+  };
+
   return (
-    <header className="fixed top-5 left-1/2 -translate-x-1/2 z-50">
-      <div
-        ref={containerRef}
-        className="relative rounded-full overflow-hidden"
-        style={{
-          background: `
-            radial-gradient(ellipse at ${glareX}% ${glareY}%, rgba(255,255,255,${fresnelIntensity}) 0%, transparent 60%),
-            linear-gradient(135deg, rgba(var(--md-sys-color-surface-container), 0.12) 0%, rgba(var(--md-sys-color-surface-container), 0.06) 100%)
-          `,
-          backdropFilter: 'blur(24px) saturate(180%) brightness(1.05)',
-          WebkitBackdropFilter: 'blur(24px) saturate(180%) brightness(1.05)',
-          border: '1px solid rgba(var(--md-sys-color-outline-variant), 0.15)',
-          boxShadow: `
-            0 8px 32px rgba(0, 0, 0, 0.15),
-            0 2px 8px rgba(0, 0, 0, 0.1),
-            inset 0 1px 0 rgba(255, 255, 255, 0.15),
-            inset 0 -1px 0 rgba(0, 0, 0, 0.05),
-            inset ${refractionX}px ${refractionY}px 20px rgba(255, 255, 255, 0.03)
-          `,
-          transform: `translateZ(0) ${isHovered
-            ? `scale(1.02) perspective(1000px) rotateX(${(mousePos.y - 0.5) * -3}deg) rotateY(${(mousePos.x - 0.5) * 3}deg)`
-            : 'scale(1)'}`,
-          transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease-out',
-          willChange: 'transform, box-shadow',
-        }}
-      >
-        {/* Edge blur/fade overlay */}
+    <>
+      <header className="fixed top-5 left-1/2 -translate-x-1/2 z-50">
         <div
-          className="absolute inset-0 rounded-full pointer-events-none"
+          ref={containerRef}
+          className="relative rounded-full overflow-hidden"
           style={{
-            background: `radial-gradient(ellipse at ${glareX}% ${glareY}%, transparent 40%, rgba(var(--md-sys-color-surface-container), 0.1) 100%)`,
-            boxShadow: 'inset 0 0 20px rgba(255, 255, 255, 0.05)',
-            willChange: 'background',
+            background: `
+              radial-gradient(ellipse at ${glareX}% ${glareY}%, rgba(255,255,255,${fresnelIntensity}) 0%, transparent 60%),
+              linear-gradient(135deg, rgba(var(--md-sys-color-surface-container), 0.12) 0%, rgba(var(--md-sys-color-surface-container), 0.06) 100%)
+            `,
+            backdropFilter: 'blur(24px) saturate(180%) brightness(1.05)',
+            WebkitBackdropFilter: 'blur(24px) saturate(180%) brightness(1.05)',
+            border: '1px solid rgba(var(--md-sys-color-outline-variant), 0.15)',
+            boxShadow: `
+              0 8px 32px rgba(0, 0, 0, 0.15),
+              0 2px 8px rgba(0, 0, 0, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15),
+              inset 0 -1px 0 rgba(0, 0, 0, 0.05),
+              inset ${refractionX}px ${refractionY}px 20px rgba(255, 255, 255, 0.03)
+            `,
+            transform: `translateZ(0) ${isHovered
+              ? `scale(1.02) perspective(1000px) rotateX(${(mousePos.y - 0.5) * -3}deg) rotateY(${(mousePos.x - 0.5) * 3}deg)`
+              : 'scale(1)'}`,
+            transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease-out',
+            willChange: 'transform, box-shadow',
           }}
-        />
+        >
+          <div
+            className="absolute inset-0 rounded-full pointer-events-none"
+            style={{
+              background: `radial-gradient(ellipse at ${glareX}% ${glareY}%, transparent 40%, rgba(var(--md-sys-color-surface-container), 0.1) 100%)`,
+              boxShadow: 'inset 0 0 20px rgba(255, 255, 255, 0.05)',
+              willChange: 'background',
+            }}
+          />
 
-        {/* Glare streak */}
-        <div
-          className="absolute inset-0 rounded-full pointer-events-none opacity-60"
-          style={{
-            background: `linear-gradient(${45 + (mousePos.x - 0.5) * 30}deg, transparent 30%, rgba(255,255,255,0.08) 45%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.08) 55%, transparent 70%)`,
-            transform: `translateZ(0) translateX(${(mousePos.x - 0.5) * 20}px)`,
-            transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
-            willChange: 'transform',
-          }}
-        />
+          <div
+            className="absolute inset-0 rounded-full pointer-events-none opacity-60"
+            style={{
+              background: `linear-gradient(${45 + (mousePos.x - 0.5) * 30}deg, transparent 30%, rgba(255,255,255,0.08) 45%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.08) 55%, transparent 70%)`,
+              transform: `translateZ(0) translateX(${(mousePos.x - 0.5) * 20}px)`,
+              transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+              willChange: 'transform',
+            }}
+          />
 
-        {/* Refraction distortion layer */}
-        <div
-          className="absolute inset-0 rounded-full pointer-events-none"
-          style={{
-            background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(var(--md-sys-color-primary), 0.04) 0%, transparent 50%)`,
-            filter: `blur(${isHovered ? 2 : 1}px)`,
-            transform: `translateZ(0) translate(${refractionX * 0.5}px, ${refractionY * 0.5}px)`,
-            transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
-            willChange: 'transform, filter',
-          }}
-        />
+          <div
+            className="absolute inset-0 rounded-full pointer-events-none"
+            style={{
+              background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(var(--md-sys-color-primary), 0.04) 0%, transparent 50%)`,
+              filter: `blur(${isHovered ? 2 : 1}px)`,
+              transform: `translateZ(0) translate(${refractionX * 0.5}px, ${refractionY * 0.5}px)`,
+              transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+              willChange: 'transform, filter',
+            }}
+          />
 
-        <nav className="relative z-10 flex items-center gap-6 px-8 py-3 font-sans">
-          <Link href="/" className="text-xl text-[rgb(var(--md-sys-color-primary))] hover:opacity-80 transition-all duration-300 ease-out hover:scale-110">
-            ney
-          </Link>
+          <nav className="relative z-10 flex items-center gap-6 px-8 py-3 font-sans">
+            <Link href="/" className="text-xl text-[rgb(var(--md-sys-color-primary))] hover:opacity-80 transition-all duration-300 ease-out hover:scale-110">
+              ney
+            </Link>
 
-          <div className="h-5 w-px bg-[rgb(var(--md-sys-color-outline-variant))] opacity-20" />
+            <div className="h-5 w-px bg-[rgb(var(--md-sys-color-outline-variant))] opacity-20" />
 
-          <div className="hidden md:flex items-center gap-6">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`nav-link ${
-                  pathname === item.href ? 'nav-link-active' : ''
-                }`}
-              >
-                {item.label}
+            <div className="hidden md:flex items-center gap-6">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`nav-link ${
+                    pathname === item.href ? 'nav-link-active' : ''
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+
+            <div className="h-5 w-px bg-[rgb(var(--md-sys-color-outline-variant))] opacity-20" />
+
+            {isAdmin && (
+              <Link href="/admin" className="nav-link">
+                Admin
               </Link>
-            ))}
-          </div>
-
-          <div className="h-5 w-px bg-[rgb(var(--md-sys-color-outline-variant))] opacity-20" />
-
-          <button
-            onClick={toggleTheme}
-            className="w-9 h-9 rounded-full flex items-center justify-center text-[rgb(var(--md-sys-color-on-surface-variant))] hover:text-[rgb(var(--md-sys-color-primary))] transition-all duration-300 ease-out active:scale-90 hover:scale-110 hover:rotate-12"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-            ) : (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-              </svg>
             )}
-          </button>
-        </nav>
-      </div>
-    </header>
+
+            <button
+              onClick={() => isAdmin ? fetch('/api/auth/logout', { method: 'POST' }).then(() => { setIsAdmin(false); window.location.reload(); }) : setShowLogin(true)}
+              className="w-9 h-9 rounded-full flex items-center justify-center text-[rgb(var(--md-sys-color-on-surface-variant))] hover:text-[rgb(var(--md-sys-color-primary))] transition-all duration-300 ease-out active:scale-90 hover:scale-110 hover:rotate-12"
+              aria-label={isAdmin ? 'Logout' : 'Login'}
+            >
+              {isAdmin ? (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+              ) : (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              )}
+            </button>
+
+            <button
+              onClick={toggleTheme}
+              className="w-9 h-9 rounded-full flex items-center justify-center text-[rgb(var(--md-sys-color-on-surface-variant))] hover:text-[rgb(var(--md-sys-color-primary))] transition-all duration-300 ease-out active:scale-90 hover:scale-110 hover:rotate-12"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              ) : (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              )}
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      <LoginModal isOpen={showLogin} onClose={() => setShowLogin(false)} onLogin={handleLoginSuccess} />
+    </>
   );
 }
